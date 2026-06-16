@@ -1,0 +1,12 @@
+# OS / editor junk
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+
+# Dependencies (if you add tooling later)
+node_modules/
+
+# Local tooling / editor config
+.claude/
+.vscode/

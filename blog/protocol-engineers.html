@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Silent Architects — Abu Aiuohall Md Ratul</title>
+  <meta name="description" content="Why protocol engineers are the most undervalued role in tech — and why I'm choosing to pursue the discipline seriously.">
+  <meta name="theme-color" content="#06050b">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <link rel="stylesheet" href="../styles.css">
+  <script>try{if(localStorage.getItem('portfolio-theme')==='light')document.body.classList.add('light-theme');}catch(e){}</script>
+</head>
+<body>
+
+  <div class="article-topbar">
+    <a class="back-home" href="../index.html#blog"><i class="ti ti-arrow-left"></i> Back to portfolio</a>
+    <span class="nav-logo-text">Aiuohall<span style="color:var(--accent)">.</span></span>
+  </div>
+
+  <article class="article-wrap">
+    <span class="article-cat cat-red"><i class="ti ti-affiliate"></i> Protocol Engineering</span>
+    <h1 class="article-title">The Silent Architects: Why Protocol Engineers Are the Most Undervalued Role in Tech</h1>
+    <div class="article-meta">
+      <span><i class="ti ti-calendar"></i> May 2026</span>
+      <span><i class="ti ti-clock"></i> 6 min read</span>
+      <span><i class="ti ti-user"></i> Abu Aiuohall Md Ratul</span>
+    </div>
+
+    <div class="article-cover">
+      <svg viewBox="0 0 760 240" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="covR" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#2a0a10"/>
+            <stop offset="1" stop-color="#120a14"/>
+          </linearGradient>
+        </defs>
+        <rect width="760" height="240" fill="url(#covR)"/>
+        <g font-family="sans-serif" font-size="13" font-weight="700" text-anchor="middle">
+          <rect x="220" y="26" width="320" height="30" rx="7" fill="#ff5b6a" opacity="0.95"/>
+          <text x="380" y="46" fill="#fff">HTTP · Application</text>
+          <rect x="220" y="66" width="320" height="30" rx="7" fill="#ff5b6a" opacity="0.8"/>
+          <text x="380" y="86" fill="#fff">TLS · Security</text>
+          <rect x="220" y="106" width="320" height="30" rx="7" fill="#ff5b6a" opacity="0.66"/>
+          <text x="380" y="126" fill="#fff">TCP · Transport</text>
+          <rect x="220" y="146" width="320" height="30" rx="7" fill="#ff5b6a" opacity="0.52"/>
+          <text x="380" y="166" fill="#fff">IP · Network</text>
+          <rect x="220" y="186" width="320" height="30" rx="7" fill="#ff5b6a" opacity="0.38"/>
+          <text x="380" y="206" fill="#fff">Ethernet · Link</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="article-body">
+      <p class="lead">Open any app on your phone. Before a single pixel reaches the screen, a dozen protocols have already done their job — quietly, perfectly, and without anyone thanking them. The people who designed those rules are some of the most consequential engineers alive. Most of them you will never hear about.</p>
+
+      <p>We celebrate the visible layer of software: the slick interface, the clever feature, the viral app. But every one of those things rides on a foundation of agreements about <em>how machines talk to each other</em>. TCP decides how a stream of bytes survives a noisy network. TLS decides how two strangers establish trust without ever having met. HTTP decides how a request becomes a response. These are not laws of nature — they are decisions, made by people, that the entire digital world now depends on.</p>
+
+      <h2>The work <span class="h2-accent">nobody sees</span></h2>
+      <p>A protocol is invisible when it works. That is precisely the problem for the people who build them. A great UI gets a screenshot on social media; a great congestion-control algorithm gets silence. The reward for a perfectly designed protocol is that nobody ever notices it exists.</p>
+      <p>And yet the leverage is staggering. A single line in a specification can shape the behaviour of billions of devices for decades. The protocols below were designed once and have been running, almost unchanged at their core, for a generation:</p>
+
+      <figure class="article-fig">
+        <div class="fig-title">How long the protocols you used today have been in production</div>
+        <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+          <line class="chart-axis" x1="130" y1="20" x2="130" y2="250"/>
+          <line class="chart-axis" x1="130" y1="250" x2="660" y2="250"/>
+          <g>
+            <text class="chart-label" x="118" y="48" text-anchor="end">TCP (1974)</text>
+            <rect x="130" y="32" width="492" height="26" rx="5" fill="#ff5b6a"/>
+            <text class="chart-val" x="632" y="50">52 yrs</text>
+
+            <text class="chart-label" x="118" y="96" text-anchor="end">DNS (1983)</text>
+            <rect x="130" y="80" width="406" height="26" rx="5" fill="#ff5b6a" opacity="0.85"/>
+            <text class="chart-val" x="546" y="98">43 yrs</text>
+
+            <text class="chart-label" x="118" y="144" text-anchor="end">HTTP (1991)</text>
+            <rect x="130" y="128" width="330" height="26" rx="5" fill="#ff5b6a" opacity="0.72"/>
+            <text class="chart-val" x="470" y="146">35 yrs</text>
+
+            <text class="chart-label" x="118" y="192" text-anchor="end">TLS/SSL (1995)</text>
+            <rect x="130" y="176" width="292" height="26" rx="5" fill="#ff5b6a" opacity="0.6"/>
+            <text class="chart-val" x="432" y="194">31 yrs</text>
+
+            <text class="chart-label" x="118" y="240" text-anchor="end">WebRTC (2011)</text>
+            <rect x="130" y="224" width="142" height="26" rx="5" fill="#ff5b6a" opacity="0.48"/>
+            <text class="chart-val" x="282" y="242">15 yrs</text>
+          </g>
+        </svg>
+        <figcaption>Frontend frameworks rise and fall every few years. Core protocols outlive entire careers.</figcaption>
+      </figure>
+
+      <h2>Why it's the <span class="h2-accent">hardest</span> kind of engineering</h2>
+      <p>Most software has a luxury that protocol design does not: you can ship, watch it break, and patch it next week. A protocol cannot work that way. Once it is deployed across millions of independent implementations — written by different teams, in different languages, on hardware you will never see — you can no longer change it. You have to get it right <strong>before</strong> the world adopts it, because after that, backward compatibility becomes a permanent constraint.</p>
+      <p>That forces a rare way of thinking. You have to reason about failure modes that haven't happened yet, adversaries who haven't shown up yet, and scale you can't test for. You are not designing for the happy path — you are designing for the network at 3 a.m. when half the packets are lost and someone is actively trying to break you.</p>
+
+      <blockquote>A protocol is a promise you make to strangers you'll never meet, written in a language that can never be ambiguous, that has to hold for thirty years.</blockquote>
+
+      <h2>What it actually <span class="h2-accent">demands</span></h2>
+      <p>The deeper I look, the clearer it becomes that this discipline asks for a specific blend of skills — and it's the blend that drew me in:</p>
+      <ul>
+        <li><strong>Precision in language.</strong> Specifications live or die on whether two engineers read the same sentence the same way. Ambiguity is a bug that ships.</li>
+        <li><strong>Adversarial imagination.</strong> Every assumption is a door, and security comes from asking who walks through it when you're not looking.</li>
+        <li><strong>Respect for constraints.</strong> Latency, packet loss, byte budgets, and ten-year-old clients that will never update. Elegance here means working <em>within</em> limits, not ignoring them.</li>
+        <li><strong>Patience.</strong> The feedback loop is measured in years, not sprints. You optimise for the long game or you don't belong here.</li>
+      </ul>
+
+      <h2>Why I'm <span class="h2-accent">choosing</span> this path</h2>
+      <p>I came to this from the bottom up. Writing OpenGL by hand taught me to respect the machine. Building full-stack apps taught me how fragile the layers above really are. Somewhere in between, I realised that the part of the stack I kept being drawn to was the part everyone else treated as a black box — the wire, the handshake, the agreement.</p>
+      <p>There's something honest about work whose only reward is that it never fails loudly. It can't be faked, it can't be rushed, and it doesn't care about hype. For an engineer who wants their work to outlast them, I'm not sure there's a better place to stand than at the foundation everyone else builds on.</p>
+      <p>The silent architects don't get the credit. But they get something better: their decisions are still running, right now, in the device in your hand. That's the kind of impact I want to spend my career chasing.</p>
+    </div>
+
+    <div class="article-foot">
+      <p>Thanks for reading. Want to talk protocols, systems, or anything in between?</p>
+      <a class="poster-btn" href="../index.html#contact"><i class="ti ti-send"></i> Get in touch</a>
+    </div>
+  </article>
+
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Localhost to Cloud — Abu Aiuohall Md Ratul</title>
+  <meta name="description" content="What actually changes when you stop self-hosting on Apache and start thinking in cloud infrastructure: scale, cost, cold starts and distributed state.">
+  <meta name="theme-color" content="#06050b">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <link rel="stylesheet" href="../styles.css">
+  <script>try{if(localStorage.getItem('portfolio-theme')==='light')document.body.classList.add('light-theme');}catch(e){}</script>
+</head>
+<body>
+
+  <div class="article-topbar">
+    <a class="back-home" href="../index.html#blog"><i class="ti ti-arrow-left"></i> Back to portfolio</a>
+    <span class="nav-logo-text">Aiuohall<span style="color:var(--accent)">.</span></span>
+  </div>
+
+  <article class="article-wrap">
+    <span class="article-cat cat-gold"><i class="ti ti-cloud"></i> Cloud Computing</span>
+    <h1 class="article-title">I Ran Apache on Localhost for Years — Here's What Moving to the Cloud Actually Taught Me</h1>
+    <div class="article-meta">
+      <span><i class="ti ti-calendar"></i> April 2026</span>
+      <span><i class="ti ti-clock"></i> 8 min read</span>
+      <span><i class="ti ti-user"></i> Abu Aiuohall Md Ratul</span>
+    </div>
+
+    <div class="article-cover">
+      <svg viewBox="0 0 760 240" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="covG" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#2a1e06"/>
+            <stop offset="1" stop-color="#13100a"/>
+          </linearGradient>
+          <linearGradient id="areaG" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#ffb44d" stop-opacity="0.45"/>
+            <stop offset="1" stop-color="#ffb44d" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <rect width="760" height="240" fill="url(#covG)"/>
+        <polygon points="40,210 160,196 280,176 400,140 520,96 640,52 720,24 720,220 40,220" fill="url(#areaG)"/>
+        <polyline points="40,210 160,196 280,176 400,140 520,96 640,52 720,24" fill="none" stroke="#ffb44d" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <line x1="40" y1="220" x2="720" y2="220" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+      </svg>
+    </div>
+
+    <div class="article-body">
+      <p class="lead">For years, "deploying" meant starting Apache on my own machine and watching the little green light. I owned every byte of that stack. Then I moved a project to the cloud — and discovered that everything I thought I knew about running software was really just knowledge about running <em>one</em> server.</p>
+
+      <p>Self-hosting on localhost is a fantastic teacher. It's also a comfortable lie. The lie is that your one machine, sitting under reliable power with one user (you), behaves anything like the systems that real traffic actually hits. Moving to the cloud didn't just give me more capacity. It rearranged how I think about software entirely.</p>
+
+      <h2>What localhost <span class="h2-accent">quietly taught me</span></h2>
+      <p>I don't regret the Apache years — they gave me fundamentals most people skip. I learned what a port actually is. I learned how a request becomes a file read becomes a response. I learned to read access logs, configure virtual hosts, and debug a 500 by actually reading the error instead of googling it. That mental model of "a server is a program that listens" has never left me.</p>
+      <p>But localhost hides the one thing that matters most at scale: <strong>what happens when there is more than one of everything.</strong></p>
+
+      <h2>The day the single box <span class="h2-accent">wasn't enough</span></h2>
+      <p>On localhost, capacity is a wall. You can serve more until the CPU saturates, and then you can't. The graph of "requests handled" is flat — a ceiling. The cloud replaces the ceiling with something stranger: capacity that <em>grows</em>, but only if you've designed for it.</p>
+
+      <figure class="article-fig">
+        <div class="fig-title">One box has a ceiling. The cloud trades it for a slope.</div>
+        <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+          <line class="chart-grid" x1="70" y1="60" x2="660" y2="60"/>
+          <line class="chart-grid" x1="70" y1="120" x2="660" y2="120"/>
+          <line class="chart-grid" x1="70" y1="180" x2="660" y2="180"/>
+          <line class="chart-axis" x1="70" y1="30" x2="70" y2="250"/>
+          <line class="chart-axis" x1="70" y1="250" x2="660" y2="250"/>
+          <!-- localhost ceiling -->
+          <polyline points="70,250 180,170 300,120 420,112 540,110 660,110" fill="none" stroke="#9aa0aa" stroke-width="3" stroke-dasharray="7 6" stroke-linecap="round"/>
+          <text class="chart-label" x="664" y="108" text-anchor="start" style="fill:#9aa0aa">localhost</text>
+          <!-- cloud autoscaling -->
+          <polyline points="70,250 180,210 300,150 420,96 540,58 640,36" fill="none" stroke="#ffb44d" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <text class="chart-val" x="600" y="28" style="fill:#ffb44d">cloud</text>
+          <text class="chart-label" x="365" y="285" text-anchor="middle">incoming traffic &#8594;</text>
+          <text class="chart-label" x="40" y="140" transform="rotate(-90 40 140)" text-anchor="middle">requests served</text>
+        </svg>
+        <figcaption>The catch: the cloud only scales if your app is built to run as many identical, stateless copies.</figcaption>
+      </figure>
+
+      <h2>Thinking in <span class="h2-accent">infrastructure</span>, not servers</h2>
+      <p>This is the real shift. On localhost there is a <em>server</em> — a thing, a noun, a box you can point at. In the cloud there is <em>infrastructure</em> — a set of rules about how things get created, replaced, and connected. Your app might be running on three machines right now and five in ten minutes. Any one of them can disappear without warning. That sounds terrifying until you realise it's actually the safety mechanism.</p>
+
+      <figure class="article-fig">
+        <div class="fig-title">Same app, two mental models</div>
+        <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+          <!-- Localhost side -->
+          <text class="chart-label" x="150" y="40" text-anchor="middle" style="font-weight:700;fill:#9aa0aa">LOCALHOST</text>
+          <rect x="70" y="120" width="160" height="70" rx="10" fill="none" stroke="#9aa0aa" stroke-width="2"/>
+          <text class="chart-val" x="150" y="150" text-anchor="middle" style="fill:#9aa0aa">Apache</text>
+          <text class="chart-label" x="150" y="172" text-anchor="middle" style="fill:#9aa0aa">one machine</text>
+
+          <line x1="320" y1="30" x2="320" y2="270" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-dasharray="5 6"/>
+
+          <!-- Cloud side -->
+          <text class="chart-label" x="510" y="40" text-anchor="middle" style="font-weight:700;fill:#ffb44d">CLOUD</text>
+          <rect x="445" y="58" width="130" height="40" rx="9" fill="#ffb44d" opacity="0.9"/>
+          <text x="510" y="83" text-anchor="middle" style="fill:#13100a;font-weight:700;font-size:12px;font-family:sans-serif">Load Balancer</text>
+          <g fill="none" stroke="#ffb44d" stroke-width="2" opacity="0.6">
+            <line x1="510" y1="98" x2="405" y2="150"/>
+            <line x1="510" y1="98" x2="510" y2="150"/>
+            <line x1="510" y1="98" x2="615" y2="150"/>
+          </g>
+          <rect x="360" y="150" width="90" height="44" rx="8" fill="none" stroke="#ffb44d" stroke-width="2"/>
+          <rect x="465" y="150" width="90" height="44" rx="8" fill="none" stroke="#ffb44d" stroke-width="2"/>
+          <rect x="570" y="150" width="90" height="44" rx="8" fill="none" stroke="#ffb44d" stroke-width="2"/>
+          <text class="chart-label" x="405" y="177" text-anchor="middle">app</text>
+          <text class="chart-label" x="510" y="177" text-anchor="middle">app</text>
+          <text class="chart-label" x="615" y="177" text-anchor="middle">app</text>
+          <g fill="none" stroke="#ffb44d" stroke-width="2" opacity="0.6">
+            <line x1="405" y1="194" x2="510" y2="238"/>
+            <line x1="510" y1="194" x2="510" y2="238"/>
+            <line x1="615" y1="194" x2="510" y2="238"/>
+          </g>
+          <rect x="450" y="238" width="120" height="40" rx="9" fill="none" stroke="#ffb44d" stroke-width="2"/>
+          <text class="chart-label" x="510" y="263" text-anchor="middle">shared database</text>
+        </svg>
+        <figcaption>State has to leave the app and live somewhere shared — that single idea unlocks everything else.</figcaption>
+      </figure>
+
+      <p>Here are the mental shifts that actually stuck with me:</p>
+      <ul>
+        <li><strong>Servers are cattle, not pets.</strong> You stop naming machines and nursing them back to health. If one misbehaves, you destroy it and a fresh one takes its place.</li>
+        <li><strong>State is the enemy of scale.</strong> Anything saved on a single instance — sessions, uploads, that one cache file — breaks the moment a second instance exists. State has to move to a database, object storage, or a cache that everyone shares.</li>
+        <li><strong>Cold starts are real.</strong> The first request after idle can be slow because something had to wake up. On localhost, nothing ever sleeps.</li>
+        <li><strong>Identity replaces passwords.</strong> IAM roles decide what each piece of the system is <em>allowed</em> to do. It's tedious, and it's the difference between a breach and a non-event.</li>
+      </ul>
+
+      <blockquote>Localhost taught me how a server works. The cloud taught me that a server is the wrong unit to think in.</blockquote>
+
+      <h2>What I'd tell my <span class="h2-accent">localhost self</span></h2>
+      <p>I'd tell him to keep the Apache habit a little longer, because owning the whole stack once is worth more than a hundred tutorials. But I'd also tell him that the comfort of one machine is a ceiling in disguise. The moment your goal stops being "make it run" and becomes "make it survive being popular," you have to stop thinking about your server and start thinking about your system.</p>
+      <p>The cloud gave me scale. But the thing I actually keep is the humility — the understanding that robustness isn't about a perfect machine, it's about a design that expects every machine to fail. That lesson has quietly changed how I write code, even the code that still runs, happily, on localhost.</p>
+    </div>
+
+    <div class="article-foot">
+      <p>Thanks for reading. Building something that needs to scale? Let's talk.</p>
+      <a class="poster-btn" href="../index.html#contact"><i class="ti ti-send"></i> Get in touch</a>
+    </div>
+  </article>
+
+</body>
+</html>

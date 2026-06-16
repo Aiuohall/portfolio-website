@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>From DSA to Distributed Systems — Abu Aiuohall Md Ratul</title>
+  <meta name="description" content="How thinking in data structures and algorithms quietly prepares you for consensus, eventual consistency, and distributed databases.">
+  <meta name="theme-color" content="#06050b">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <link rel="stylesheet" href="../styles.css">
+  <script>try{if(localStorage.getItem('portfolio-theme')==='light')document.body.classList.add('light-theme');}catch(e){}</script>
+</head>
+<body>
+
+  <div class="article-topbar">
+    <a class="back-home" href="../index.html#blog"><i class="ti ti-arrow-left"></i> Back to portfolio</a>
+    <span class="nav-logo-text">Aiuohall<span style="color:var(--accent)">.</span></span>
+  </div>
+
+  <article class="article-wrap">
+    <span class="article-cat cat-blue"><i class="ti ti-binary-tree"></i> Systems Thinking</span>
+    <h1 class="article-title">From DSA to Distributed Systems: How Thinking in Algorithms Prepares You for the Next Frontier</h1>
+    <div class="article-meta">
+      <span><i class="ti ti-calendar"></i> March 2026</span>
+      <span><i class="ti ti-clock"></i> 7 min read</span>
+      <span><i class="ti ti-user"></i> Abu Aiuohall Md Ratul</span>
+    </div>
+
+    <div class="article-cover">
+      <svg viewBox="0 0 760 240" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="covB" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#0a1430"/>
+            <stop offset="1" stop-color="#0a0e1a"/>
+          </linearGradient>
+        </defs>
+        <rect width="760" height="240" fill="url(#covB)"/>
+        <polyline points="60,210 760,202" fill="none" stroke="#42d392" stroke-width="3" stroke-linecap="round"/>
+        <polyline points="60,210 180,178 340,156 520,142 740,132" fill="none" stroke="#2dd4bf" stroke-width="3" stroke-linecap="round"/>
+        <polyline points="60,210 700,70" fill="none" stroke="#5b8cff" stroke-width="3" stroke-linecap="round"/>
+        <polyline points="60,210 240,150 420,84 560,40" fill="none" stroke="#ffb44d" stroke-width="3" stroke-linecap="round"/>
+        <polyline points="60,210 150,190 220,140 280,70 312,26" fill="none" stroke="#ff5b6a" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+    </div>
+
+    <div class="article-body">
+      <p class="lead">For a long time I thought data structures and algorithms were a hoop to jump through — interview trivia, contest problems, the price of admission. I was wrong. DSA wasn't teaching me tricks. It was teaching me a way of seeing, and that way of seeing turns out to be exactly what distributed systems demand.</p>
+
+      <p>When you spend enough time with algorithms, something rewires in how you read every problem. You stop asking "does it work?" and start asking "what does it cost, and what does it cost when the input gets ugly?" That single shift — from correctness to <em>trade-offs</em> — is the entire foundation of building systems that span more than one machine.</p>
+
+      <h2>What data structures were <span class="h2-accent">really teaching me</span></h2>
+      <p>Every data structure is an argument about trade-offs. A hash map buys you speed and pays with memory and ordering. A balanced tree gives up constant-time lookup to keep things sorted. An array is brutally fast to read and brutally slow to insert into. None of them is "best" — each is a different answer to "what do you want to be cheap, and what are you willing to make expensive?"</p>
+      <p>Dynamic programming taught me a second instinct: <strong>optimal substructure</strong>. The idea that a big, scary problem is often just smaller versions of itself, and if you solve and remember the small ones, the big one falls out almost for free. Once that clicks, you start seeing it everywhere.</p>
+
+      <figure class="article-fig">
+        <div class="fig-title">The first thing DSA rewires: reading a problem as a growth curve</div>
+        <svg viewBox="0 0 700 320" xmlns="http://www.w3.org/2000/svg">
+          <line class="chart-grid" x1="70" y1="70" x2="650" y2="70"/>
+          <line class="chart-grid" x1="70" y1="140" x2="650" y2="140"/>
+          <line class="chart-grid" x1="70" y1="210" x2="650" y2="210"/>
+          <line class="chart-axis" x1="70" y1="30" x2="70" y2="270"/>
+          <line class="chart-axis" x1="70" y1="270" x2="650" y2="270"/>
+          <text class="chart-label" x="360" y="305" text-anchor="middle">input size (n) &#8594;</text>
+          <text class="chart-label" x="34" y="150" transform="rotate(-90 34 150)" text-anchor="middle">work done</text>
+
+          <polyline points="70,258 650,254" fill="none" stroke="#42d392" stroke-width="3" stroke-linecap="round"/>
+          <text x="656" y="252" style="fill:#42d392;font-size:13px;font-weight:700;font-family:sans-serif">O(1)</text>
+
+          <polyline points="70,260 170,228 300,210 450,198 650,190" fill="none" stroke="#2dd4bf" stroke-width="3" stroke-linecap="round"/>
+          <text x="656" y="190" style="fill:#2dd4bf;font-size:13px;font-weight:700;font-family:sans-serif">O(log n)</text>
+
+          <polyline points="70,260 630,80" fill="none" stroke="#5b8cff" stroke-width="3" stroke-linecap="round"/>
+          <text x="600" y="70" style="fill:#5b8cff;font-size:13px;font-weight:700;font-family:sans-serif">O(n)</text>
+
+          <polyline points="70,260 230,200 400,110 520,50" fill="none" stroke="#ffb44d" stroke-width="3" stroke-linecap="round"/>
+          <text x="470" y="42" style="fill:#ffb44d;font-size:13px;font-weight:700;font-family:sans-serif">O(n log n)</text>
+
+          <polyline points="70,260 150,238 220,180 280,96 312,40" fill="none" stroke="#ff5b6a" stroke-width="3" stroke-linecap="round"/>
+          <text x="300" y="32" style="fill:#ff5b6a;font-size:13px;font-weight:700;font-family:sans-serif">O(n&#178;)</text>
+        </svg>
+        <figcaption>Once you see problems as curves, "it works on my test case" stops being good enough.</figcaption>
+      </figure>
+
+      <h2>The same instincts, a <span class="h2-accent">bigger arena</span></h2>
+      <p>Distributed systems are where those instincts grow up. The questions feel familiar, just scaled to a world where the "machine" is now dozens of machines that can't fully trust each other and can fail at any moment.</p>
+      <p>Caching is just memoization with a network in the middle. Sharding a database is a hashing problem wearing a suit. Load balancing is a scheduling algorithm. Replication is redundancy with a consistency tax. Every one of these is a DSA idea I already met — now with the added, humbling constraint that messages get lost, clocks disagree, and any node might vanish mid-sentence.</p>
+
+      <h2>When "the answer" becomes <span class="h2-accent">"an agreement"</span></h2>
+      <p>Here's the leap that genuinely changed how I think. In a single program, a value <em>is</em> what it is. In a distributed system, there is no single source of truth handed to you — truth is something a group of machines has to <strong>agree</strong> on, even while some of them are failing or lying. That's the consensus problem, and algorithms like Raft and Paxos exist precisely to solve it.</p>
+
+      <figure class="article-fig">
+        <div class="fig-title">Consensus: one elected leader, replicating a decision to followers</div>
+        <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+          <!-- connections -->
+          <g stroke="#5b8cff" stroke-width="2" opacity="0.5">
+            <line x1="350" y1="150" x2="150" y2="80"/>
+            <line x1="350" y1="150" x2="560" y2="80"/>
+            <line x1="350" y1="150" x2="180" y2="240"/>
+            <line x1="350" y1="150" x2="540" y2="240"/>
+          </g>
+          <!-- leader -->
+          <circle cx="350" cy="150" r="40" fill="#5b8cff"/>
+          <text x="350" y="148" text-anchor="middle" style="fill:#0a0e1a;font-weight:800;font-size:13px;font-family:sans-serif">LEADER</text>
+          <text x="350" y="166" text-anchor="middle" style="fill:#0a0e1a;font-size:11px;font-family:sans-serif">term 4</text>
+          <!-- followers -->
+          <g>
+            <circle cx="150" cy="80" r="30" fill="none" stroke="#9db8ff" stroke-width="2.5"/>
+            <text x="150" y="85" text-anchor="middle" class="chart-label">follower</text>
+            <circle cx="560" cy="80" r="30" fill="none" stroke="#9db8ff" stroke-width="2.5"/>
+            <text x="560" y="85" text-anchor="middle" class="chart-label">follower</text>
+            <circle cx="180" cy="240" r="30" fill="none" stroke="#9db8ff" stroke-width="2.5"/>
+            <text x="180" y="245" text-anchor="middle" class="chart-label">follower</text>
+            <circle cx="540" cy="240" r="30" fill="none" stroke="#9db8ff" stroke-width="2.5"/>
+            <text x="540" y="245" text-anchor="middle" class="chart-label">follower</text>
+          </g>
+          <text x="350" y="285" text-anchor="middle" class="chart-label">a change is committed only once a majority has acknowledged it</text>
+        </svg>
+        <figcaption>The leader doesn't just decide — it waits for a quorum. Majority agreement is what makes the system survive failures.</figcaption>
+      </figure>
+
+      <p>What carries over from DSA is almost everything:</p>
+      <ul>
+        <li><strong>Trade-off literacy.</strong> The CAP theorem — consistency, availability, partition-tolerance, pick your compromise — is just the trade-off mindset at planetary scale.</li>
+        <li><strong>Invariants.</strong> The same discipline that keeps a red-black tree balanced is what keeps a replicated log consistent: define what must always be true, then never violate it.</li>
+        <li><strong>Worst-case thinking.</strong> DSA trains you to design for the adversarial input. Distributed systems just rename the adversary "the network."</li>
+        <li><strong>Decomposition.</strong> Optimal substructure becomes "break the system into services that each do one thing and compose cleanly."</li>
+      </ul>
+
+      <blockquote>In a single machine you compute the answer. In a distributed system, the answer is whatever a majority can agree on before something fails.</blockquote>
+
+      <h2>The <span class="h2-accent">frontier</span></h2>
+      <p>This is why I don't see DSA and distributed systems as separate subjects — one is the grammar, the other is the literature. The years spent reasoning about Big-O, invariants, and substructure weren't preparation for an interview. They were preparation for the questions that actually get harder the more machines you add.</p>
+      <p>Eventual consistency, consensus, distributed databases — they look intimidating from the outside. But up close, they reward the exact instincts a good algorithms education builds: see the trade-off, protect the invariant, plan for the worst case, and break the impossible thing into solvable pieces. That's the frontier I want to keep walking toward, and it turns out I've been training for it the whole time.</p>
+    </div>
+
+    <div class="article-foot">
+      <p>Thanks for reading. Into systems and algorithms too? I'd love to compare notes.</p>
+      <a class="poster-btn" href="../index.html#contact"><i class="ti ti-send"></i> Get in touch</a>
+    </div>
+  </article>
+
+</body>
+</html>

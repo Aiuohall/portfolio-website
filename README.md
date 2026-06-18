@@ -28,8 +28,7 @@ My personal portfolio website — a Full-Stack & Systems Developer based in Dhak
 | `404.html` | Custom error page |
 | `screenshots/` | Project screenshots (add yours here) |
 
-## 🚀 Run locally
-Open `index.html` in a browser, or serve it:
+
 
     npx serve .
 

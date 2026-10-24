@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title description">
+  <title id="title">IEEE SMS Spam Detection</title>
+  <desc id="description">A machine learning research paper cover for SMS spam detection.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#15112b"/>
+      <stop offset="1" stop-color="#3a1f5d"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#c694fb"/>
+      <stop offset="1" stop-color="#66d6ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#background)"/>
+  <circle cx="1000" cy="115" r="220" fill="#6e3cab" opacity=".2"/>
+  <circle cx="130" cy="570" r="220" fill="#207da4" opacity=".16"/>
+  <g fill="none" stroke="url(#accent)" stroke-width="5" opacity=".65">
+    <path d="M735 170h260a42 42 0 0 1 42 42v120a42 42 0 0 1-42 42H865l-73 58 14-58h-71a42 42 0 0 1-42-42V212a42 42 0 0 1 42-42Z"/>
+    <path d="m781 252 34 32 70-76" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M859 302h118M859 332h82" stroke-linecap="round"/>
+  </g>
+  <text x="104" y="146" fill="#c694fb" font-family="Arial, sans-serif" font-size="28" font-weight="700" letter-spacing="7">RESEARCH PAPER</text>
+  <text x="100" y="265" fill="#ffffff" font-family="Georgia, serif" font-size="69" font-weight="700">IEEE SMS</text>
+  <text x="100" y="345" fill="#ffffff" font-family="Georgia, serif" font-size="69" font-weight="700">Spam Detection</text>
+  <rect x="104" y="391" width="365" height="3" fill="url(#accent)"/>
+  <text x="104" y="455" fill="#d8d0e7" font-family="Arial, sans-serif" font-size="29">Machine Learning • NLP • Classification</text>
+  <text x="104" y="538" fill="#8ce6ff" font-family="Arial, sans-serif" font-size="25" font-weight="700" letter-spacing="4">ACADEMIC RESEARCH</text>
+</svg>

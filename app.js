@@ -114,9 +114,6 @@ document.addEventListener('DOMContentLoaded', () => {
       themeIcon.className = isLight ? 'ti ti-sun' : 'ti ti-moon';
     }
 
-    // Save user choice in localstorage
-    localStorage.setItem('portfolio-theme', newTheme);
-
     // Call 3D Canvas Theme Sync
     if (window.set3DTheme) {
       window.set3DTheme(newTheme);
@@ -127,13 +124,8 @@ document.addEventListener('DOMContentLoaded', () => {
     themeToggleBtn.addEventListener('click', toggleTheme);
   }
 
-  // Restore saved theme on initial page render
-  const savedTheme = localStorage.getItem('portfolio-theme');
-  if (savedTheme === 'light') {
-    document.body.classList.add('light-theme');
-    if (themeIcon) themeIcon.className = 'ti ti-sun';
-    // 3D theme synchronization will happen automatically on canvas load
-  }
+  // The portfolio always opens in light mode; visitors can enable dark mode with the toggle.
+  if (themeIcon) themeIcon.className = 'ti ti-sun';
 
   // --- 4. Mobile Menu Toggler ---
   const mobileToggle = document.getElementById('mobile-menu-toggle');
